@@ -25,12 +25,12 @@ ldap {
 
 	#  Administrator account for searching and possibly modifying.
 	#  If using SASL + KRB5 these should be commented out.
-	identity = 'Value returned from Google (LDAP client)'
-	password = Value returned from Google (LDAP client)
+	identity = 'GOOGLE_LDAP_USERNAME'
+	password = GOOGLE_LDAP_PASSWORD
 
 	#  Unless overridden in another section, the dn from which all
 	#  searches will start from.
-	base_dn = 'dc=example,dc=com'
+	base_dn = 'dc=BASE_DOMAIN,dc=DOMAIN_EXTENSION'
 
 	#
 	#  You can run the 'ldapsearch' command line tool using the
