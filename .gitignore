@@ -1,3 +1,5 @@
 .idea
 .DS_store
 certs
+env/freeradius.env
+*~

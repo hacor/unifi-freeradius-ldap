@@ -31,5 +31,20 @@ If you encounter problems, it might be interesting to follow the output of the c
 
 Now the freeradius should be up and running and accepting connections using the `user@example.com` and `user` as login names.
 
+## docker-compose
+
+After the certificates copy to `./certs`.
+
+```
+cd env
+cp freeradius.env.sample freeradius.env
+```
+then, change the values of the variables
+
+```
+docker-compose up
+```
+
+
 Have fun!
 Hacor
