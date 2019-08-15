@@ -33,14 +33,13 @@ Now the freeradius should be up and running and accepting connections using the 
 
 ## docker-compose
 
-After the certificates copy to `./certs`.
+After certificates copy to `./certs`.
 
 ```
 cd env
 cp freeradius.env.sample freeradius.env
 ```
-then, change the values of the variables
-
+then, change the variables values for your environment and:
 ```
 docker-compose up
 ```
