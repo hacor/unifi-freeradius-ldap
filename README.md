@@ -2,7 +2,7 @@
 
 With all respects to major designer jongoldsz
 
-This is a quick step-by-step guide to getting a Freeradius server set up to support G-Suite authentication for UniFi WPA2 enterprise wireless networks. This setup is tested with Unifi and Aerohive successfully.
+This is a quick step-by-step guide to getting a Freeradius server set up to support G-Suite authentication for UniFi WPA2 enterprise wireless networks. This setup is tested with Unifi and Aerohive successfully. Also tests with OpenLDAP seemed to work.
 
 Note: At time of writing this guide, you will need G Suite Enterprise, G Suite Enterprise for Education, G Suite Education, or Cloud Identity Premium licensing to use Google's Secure LDAP service. If you don't have this licensing, you will not be able to get authentication working by following this guide.
 
@@ -17,7 +17,7 @@ When you download the certificates archive, extract the files and remember this 
 Be sure to click on the "Generate access credentials" link in step 3, to generate values for identity and password required for the next step. This password is only shown once, so be careful not to close the window yet!
 
 ## Configuration
-In order to successfully run the container, following environment variables should be passed on to the container. If not all parameters are provided, the container will fail.
+In order to successfully run the container, following environment variables are passed on to the container. If not all parameters are provided, the container will fail. Renaim the `freeradius.env.sample` file to `freeradius.env` and make the necessary changes.
 
 - `ACCESS_ALLOWED_CIDR` : The CIDR (e.g. 192.168.1.1/24) which is allowed access to the freeradius server. This will probably be the IP range of your Wifi Access Points.
 - `BASE_DOMAIN`: The first part of your domain name used in the Google suite: `example` if your domain name is `example.com`
