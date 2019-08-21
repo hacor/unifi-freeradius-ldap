@@ -1,0 +1,14 @@
+version: '3.2'
+services:
+  unifi-freeradius-ldap:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    image: haor/freeradius-google-ldap:latest
+    #command: -X
+    env_file: freeradius.env
+    volumes:
+      - type: bind
+        source: ./certs
+        target: /certs
+    network_mode: host

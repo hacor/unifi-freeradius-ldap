@@ -26,16 +26,32 @@ In order to successfully run the container, following environment variables shou
 - `GOOGLE_LDAP_PASSWORD`: The password Google gave you when configuring the Client credentials 
 - `SHARED_SECRET`: The shared secret needed to be able to talk to the FreeRADIUS server
 
-In order to run the container also needs the directory where the certificates you received (and extracted) from Google are located. These files need to be mounted to the `/certs` folder
+In order to run the container also needs the directory where the certificates you received (and extracted) from Google are located. These files need to be mounted to the `/certs` folder and renamed to `ldap-client.crt` and `ldap-client.key` respectively.
 Run the following command to spin up the freeradius-gsuite container:
 
-`docker run -d --network host --name freeradius-secure-ldap -e ACCESS_ALLOWED_CIDR=192.168.1.1/24 -e SHARED_SECRET=testing123 -e BASE_DOMAIN=example -e DOMAIN_EXTENSION=com -e GOOGLE_LDAP_USERNAME=WhateverGoogleGaveYou -e GOOGLE_LDAP_PASSWORD=whateverGoogleGaveYou -v /Users/whatever/Downloads/Google_2022_05_13_50853:/certs haor/freeradius-google-ldap:latest`
+`docker-compose up`
 
-If you encounter problems, it might be interesting to follow the output of the container by adding `-X` at the end of the previous command
+If you encounter problems, it might be interesting to follow the output of the container by uncommenting the `command: -X` line in `docker-compose.yaml`
 
-`docker run -d --network host --name freeradius-secure-ldap -e ACCESS_ALLOWED_CIDR=192.168.1.1/24 -e SHARED_SECRET=testing123 -e BASE_DOMAIN=example -e DOMAIN_EXTENSION=com -e GOOGLE_LDAP_USERNAME=WhateverGoogleGaveYou -e GOOGLE_LDAP_PASSWORD=whateverGoogleGaveYou -v /Users/whatever/Downloads/Google_2022_05_13_50853:/certs haor/freeradius-google-ldap:latest -X`
 
 Now the freeradius should be up and running and accepting connections using the `user@example.com` and `user` as login names.
+
+## Adding a custom certificate for the EAP authentication
+
+In order to change the `Example Server certificate` which you need to accept before logging in to the Freeradius server, you need to create your own Certificate Authority and server certificate. More info can be found in the container in the `/etc/raddb/certs/README` file.
+
+You can use the container to create your new certificates as documented in the README file. When done you should need at least following files copied to the `./certs` directory here. Do not change their names!
+
+- `ca.key`
+- `ca.pem`
+- `dh`
+- `server.crt`
+- `server.csr`
+- `server.key`
+- `server.p12`
+- `server.pem`
+
+Now you can restart the container and the new certificates will be used
 
 Have fun!
 Hacor
