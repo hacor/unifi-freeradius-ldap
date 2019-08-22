@@ -5,6 +5,12 @@ services:
     # uncomment this line for debug
     #command: freeradius -X
     env_file: env/freeradius.env
+    build:
+      dockerfile: Dockerfile
+      context: .
+    image: haor/freeradius-google-ldap:latest
+    #command: -X
+    env_file: env/freeradius.env
     volumes:
       - type: bind
         source: ./certs
