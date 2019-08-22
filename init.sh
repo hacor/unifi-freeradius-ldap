@@ -14,14 +14,20 @@ echo "$@"
 # replace all those env params in the file
 sed -i "s|ACCESS_ALLOWED_CIDR|$ACCESS_ALLOWED_CIDR|g" /etc/freeradius/clients.conf
 sed -i "s|SHARED_SECRET|$SHARED_SECRET|g" /etc/freeradius/clients.conf
-sed -i "s|BASE_DOMAIN|$BASE_DOMAIN|g" /etc/freeradius/mods-available/ldap
+
 sed -i "s|BASE_DOMAIN|$BASE_DOMAIN|g" /etc/freeradius/proxy.conf
-sed -i "s|DOMAIN_EXTENSION|$DOMAIN_EXTENSION|g" /etc/freeradius/mods-available/ldap
 sed -i "s|DOMAIN_EXTENSION|$DOMAIN_EXTENSION|g" /etc/freeradius/proxy.conf
+
 sed -i "s|GOOGLE_LDAP_PASSWORD|$GOOGLE_LDAP_PASSWORD|g" /etc/freeradius/mods-available/ldap
 sed -i "s|GOOGLE_LDAP_USERNAME|$GOOGLE_LDAP_USERNAME|g" /etc/freeradius/mods-available/ldap
 
-ls -las /certs
+# add support to second level like: .com.br, .com.ar
+sed -i "s|BASE_DOMAIN|$BASE_DOMAIN|g" /etc/freeradius/mods-available/ldap
+if [[ ${DOMAIN_EXTENSION} =~ [.] ]]; then
+    DOMAIN_EXTENSION=$( echo $DOMAIN_EXTENSION | awk -F'.' '{print $1",dc="$2}' )
+fi
+sed -i "s|DOMAIN_EXTENSION|$DOMAIN_EXTENSION|g" /etc/freeradius/mods-available/ldap
+
 
 # Handle the certs
 cp /certs/ldap-client.key /etc/freeradius/certs/ldap-client.key

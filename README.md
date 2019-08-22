@@ -17,7 +17,7 @@ When you download the certificates archive, extract the files and remember this 
 Be sure to click on the "Generate access credentials" link in step 3, to generate values for identity and password required for the next step. This password is only shown once, so be careful not to close the window yet!
 
 ## Configuration
-In order to successfully run the container, following environment variables are passed on to the container. If not all parameters are provided, the container will fail. Renaim the `freeradius.env.sample` file to `freeradius.env` and make the necessary changes.
+In order to successfully run the container, following environment variables are passed on to the container. If not all parameters are provided, the container will fail. Rename the `env/freeradius.env.sample` file to `env/freeradius.env` and make the necessary changes.
 
 - `ACCESS_ALLOWED_CIDR` : The CIDR (e.g. 192.168.1.1/24) which is allowed access to the freeradius server. This will probably be the IP range of your Wifi Access Points.
 - `BASE_DOMAIN`: The first part of your domain name used in the Google suite: `example` if your domain name is `example.com`
@@ -35,6 +35,7 @@ If you encounter problems, it might be interesting to follow the output of the c
 
 
 Now the freeradius should be up and running and accepting connections using the `user@example.com` and `user` as login names.
+
 
 ## Adding a custom certificate for the EAP authentication
 
