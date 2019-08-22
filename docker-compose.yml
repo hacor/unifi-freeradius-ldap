@@ -1,16 +1,12 @@
 version: '3.2'
 services:
   unifi-freeradius-ldap:
-    build:
-      dockerfile: Dockerfile
-      context: .
-    
-    # don't have second level support on BASE_DOMAIN
-    #image: haor/freeradius-google-ldap:latest
+    image: haor/freeradius-google-ldap:latest
+    # uncomment this line for debug
+    #command: freeradius -X
     env_file: env/freeradius.env
     volumes:
       - type: bind
         source: ./certs
         target: /certs
     network_mode: host
-    
