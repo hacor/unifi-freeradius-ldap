@@ -1,4 +1,4 @@
-FROM freeradius/freeradius-server:3.0.19
+FROM freeradius/freeradius-server:3.0.23
 
 COPY configs/clients.conf /etc/freeradius/clients.conf
 COPY configs/default /etc/freeradius/sites-available/default
